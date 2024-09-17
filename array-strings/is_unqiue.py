@@ -15,6 +15,7 @@ If sting is an ASCII is it extended?
 # Brute Force
 """
 def is_unique(string):
+    # Iterate through string and check if there is more than one of each character.
     for char_one in range(len(string)):
         for char_two in range(char_one + 1, len(string)):
             if string[char_one] == string[char_two]:
@@ -34,6 +35,7 @@ def is_unique(string):
     # Create a boolean array of size 128 for ASCII characters
     seen = [False] * 128
 
+    # Check if each character has been seen or not
     for char in string:
         ascii_val = ord(char)
         if seen[ascii_val]:
@@ -42,6 +44,7 @@ def is_unique(string):
 
     return True
 """
+
 """
 Time Complexity O(n)
 Space Complexity O(1)
@@ -54,13 +57,19 @@ c - is the size of the character set
 
 # Reduced space usage method
 def is_unique(string):
-    checker = 0  # This will act as the bit vector
+    # Create bit vector
+    checker = 0 
+
+    # Get index of the character
     for char in string:
-        val = ord(char) - ord('a')  # Get the index of the character relative to 'a'
-        if (checker & (1 << val)) > 0:  # Check if the bit at position 'val' is already set
-            return False  # If it is, we found a duplicate character
-        checker |= (1 << val)  # Set the bit for this character
-    return True 
+        val = ord(char) - ord('a')  
+        if (checker & (1 << val)) > 0: 
+            return False 
+         
+        # Set the bit 
+        checker |= (1 << val)  
+    
+    return True
 
 #Time Complexity O(n)
 #Space Complexity O(1)
@@ -80,7 +89,7 @@ class TestIsUnique(unittest.TestCase):
         self.assertTrue(is_unique(''))
 
     def test_single_character(self):
-        self.assertTrue(is_unique('a'))
+        self.assertTrue(is_unique('b'))
 
     """
     def test_max_length_unique(self):
